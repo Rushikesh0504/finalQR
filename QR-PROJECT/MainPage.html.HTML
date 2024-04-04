@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR CODE DEVELOPING SYSTEM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <p>ENTER YOUR TEXT/URL</p>
+        <input type="text" placeholder="PASTE YOUR URL" id="qrText">
+        <div id="imgbox">
+            <img src="" id="qrImage">
+        </div>
+        <button onclick="generateQR()">GENERATE THE QR CODE</button>
+        <button onclick="downloadQR()">DOWNLOAD QR</button>
+    </div>
+    <footer>
+        <h1>GET THE QR FOR ANY WEBSITE</h1>
+    </footer>
+
+    <script>
+        let imgbox = document.getElementById("imgbox");
+        let qrImage = document.getElementById("qrImage");
+        let qrText = document.getElementById("qrText");
+
+        function clearInput() {
+            qrText.value = "";
+        }
+
+        function generateQR() {
+            if (qrText.value.length > 0) {
+                qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + qrText.value;
+                imgbox.classList.add("show-img");
+            }
+        }
+
+        function downloadQR() {
+            if (qrImage.src) {
+                // Create a temporary anchor element
+                let link = document.createElement('a');
+                // Set the href attribute of the anchor element to the QR code image source
+                link.href = qrImage.src;
+                // Set the download attribute of the anchor element to a specified filename
+                link.download = 'QR_Code.png';
+                // Simulate a click on the anchor element
+                link.click();ś
+            }
+        }
+    </script>
+</body>
+
+</html>
